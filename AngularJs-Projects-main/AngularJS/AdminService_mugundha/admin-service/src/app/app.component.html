@@ -1,0 +1,226 @@
+<div class="">
+  <div style="height:100vh;">
+
+   <div class="">
+    
+     <div class="shadow w-20 p-5 position-absolute top-50 start-50 translate-middle">
+       <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+         <h4 class="display-6 text-center py-2">Admin Database</h4>
+        <div class="">
+          <label for="a_id"> ID </label>
+          <div class="">
+            <input id="a_id" required #a_id="ngModel" (ngModel)="a_id" name="a_id" type="text"  
+            class="form-control" placeholder="enter your ID" pattern="(^\d{9}$)">
+            <div *ngIf="a_id.invalid && a_id.touched">
+              <small class="text-danger" *ngIf="a_id.errors?.['required']">Required
+
+              </small>
+              <small class="text-danger" *ngIf="a_id.errors?.['pattern']">Must be a valid number
+              </small>
+
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="a_name">Name </label>
+          <div class="">
+            <input id="a_name" required #a_name="ngModel" (ngModel)="a_name" name="a_name" type="text"  
+            class="form-control" placeholder="enter your name">
+            <div *ngIf="a_name.invalid && a_name.touched">
+              <small class="text-danger" *ngIf="a_name.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="a_dept">Dept </label>
+          <div class="">
+            <input id="a_dept" required #a_dept="ngModel" (ngModel)="a_dept" name="a_dept" type="text"  
+            class="form-control" placeholder="enter your Dept">
+            <div *ngIf="a_dept.invalid && a_dept.touched">
+              <small class="text-danger" *ngIf="a_dept.errors?.['required']">Required
+              </small>
+            </div>
+          </div>
+        </div><br>
+        
+        <div class="">
+          <label for="a_dob">Dob </label>
+          <div class="">
+            <input id="a_dob" required #a_dob="ngModel" (ngModel)="a_dob" name="a_dob" type="text"  
+            class="form-control" placeholder="enter your Dob">
+            <div *ngIf="a_dob.invalid && a_dob.touched">
+              <small class="text-danger" *ngIf="email.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="a_pho">PhoneNumber </label>
+          <div class="">
+            <input id="a_pho" required #a_pho="ngModel" (ngModel)="a_pho" name="a_pho" type="text"  
+            class="form-control" placeholder="enter your PhoneNumber">
+            <div *ngIf="a_pho.invalid && a_pho.touched">
+              <small class="text-danger" *ngIf="a_pho.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="a_address">Address </label>
+          <div class="">
+            <input id="a_address" required #a_address="ngModel" (ngModel)="a_address" name="a_address" type="text"  
+            class="form-control" placeholder="enter your Address">
+            <div *ngIf="a_address.invalid && a_address.touched">
+              <small class="text-danger" *ngIf="a_address.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+  
+        <div class="form-group text-center">
+          <input class="btn btn-primary" type="submit" value="submit">
+        </div>
+      </form>
+     </div>
+   </div>
+</div><br>
+<div class="mt-5">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Dept</th>
+        <th>Dob</th>
+        <th>PhoneNumber</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of adminDetails">
+        <td>{{admin.a_id}}</td>
+        <td>{{admin.a_name}}</td>
+        <td>{{admin.a_dept}}</td>
+        <td>{{admin.a_dob}}</td>
+        <td>{{admin.a_pho}}</td>
+        <td>{{admin.a_address}}</td>
+        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(admin)">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteAdmin(admin)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Admin</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateAdmin()">
+          <h4 class="display-6 text-center py-2">Admin Database</h4>
+         <div class="">
+           <label for="a_id"> ID </label>
+           <div class="">
+             <input id="a_id" required #a_id="ngModel" [(ngModel)]="adminToUpdate.a_id" name="a_id" type="text"  
+             class="form-control" placeholder="enter your ID" pattern="(^\d{9}$)">
+             <div *ngIf="a_id.invalid && a_id.touched">
+               <small class="text-danger" *ngIf="a_id.errors?.['required']">Required
+ 
+               </small>
+               <small class="text-danger" *ngIf="a_id.errors?.['pattern']">Must be a valid number
+               </small>
+ 
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="a_name"> Name </label>
+           <div class="">
+             <input id="a_name" required #a_name="ngModel" [(ngModel)]="adminToUpdate.a_name" name="a_name" type="text"  
+             class="form-control" placeholder="enter your name">
+             <div *ngIf="a_name.invalid && a_name.touched">
+               <small class="text-danger" *ngIf="a_name.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="a_dept">Dept </label>
+           <div class="">
+             <input id="a_dept" required #a_dept="ngModel" [(ngModel)]="adminToUpdate.a_dept" name="a_dept" type="text"  
+             class="form-control" placeholder="enter your Dept">
+             <div *ngIf="a_dept.invalid && a_dept.touched">
+               <small class="text-danger" *ngIf="a_dept.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+           <label for="a_dob">Dob</label>
+           <div class="">
+             <input id="a_dob" required #a_dob="ngModel" [(ngModel)]="adminToUpdate.a_dob" name="a_dob" type="text"  
+             class="form-control" placeholder="enter your Dob">
+             <div *ngIf="a_dob.invalid && a_dob.touched">
+               <small class="text-danger" *ngIf="a_dob.errors?.['required']">Required
+               </small>
+             </div>
+             
+           </div>
+         </div><br>
+         <div class="">
+          <label for="a_pho">PhoneNumber </label>
+          <div class="">
+            <input id="a_pho" required #a_pho="ngModel" [(ngModel)]="adminToUpdate.a_pho" name="a_pho" type="text"  
+            class="form-control" placeholder="enter your PhoneNumber">
+            <div *ngIf="a_pho.invalid && a_pho.touched">
+              <small class="text-danger" *ngIf="a_pho.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+        <div class="">
+          <label for="a_address">Address </label>
+          <div class="">
+            <input id="a_address" required #a_address="ngModel" [(ngModel)]="adminToUpdate.a_address" name="a_address" type="text"  
+            class="form-control" placeholder="enter your Address">
+            <div *ngIf="a_address.invalid && a_address.touched">
+              <small class="text-danger" *ngIf="a_address.errors?.['required']">Required
+              </small>
+            </div>
+            
+          </div>
+        </div><br>
+     
+         <div class="form-group text-center">
+           <input class="btn btn-primary" type="submit" value="update">
+         </div>
+       </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+  <!-- Your form inputs and validation messages here -->
+  
+  <div class="form-group text-center">
+    <input class="btn btn-primary" type="submit" value="submit">
+  </div>
+</form>
